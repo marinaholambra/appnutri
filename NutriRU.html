@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NutriRU</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#f8f1e1;--card:#ece6d6;--ink:#1c1b1a;--mut:#6b6761;--line:#ddd5c3;--side:#141414;--pk:#f4b3d6;--yl:#f5d655;--gr:#b5c985;--bl:#b8c9ec;--ac:#a01c6e;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121211;--card:#1d1c1b;--ink:#f1eee8;--mut:#a29d94;--line:#34322f;--side:#000;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121211;--card:#1d1c1b;--ink:#f1eee8;--mut:#a29d94;--line:#34322f;--side:#000;color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 Outfit,"Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+.app{display:flex;min-height:100vh}
+nav{width:190px;flex:none;background:var(--side);color:#fff;padding:18px 10px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;align-self:flex-start;height:100vh;border-radius:0 18px 18px 0}
+nav b{padding:6px 12px 14px;font-size:19px}
+nav a{color:#cfcac2;text-decoration:none;padding:10px 12px;border-radius:10px;display:flex;gap:10px}
+nav a.on{background:#2c2c2c;color:#fff}
+main{flex:1;min-width:0;padding:22px 24px 40px;max-width:1100px}
+h1{font-size:36px;line-height:1.05;font-weight:600;letter-spacing:-.02em;margin:0 0 8px}h1 i{font-weight:400}h2{font-size:17px;margin:0 0 8px}
+.g{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:14px 0}
+.c{border-radius:26px;padding:18px;background:var(--card);border:0}
+.c.pc{border:0;color:#1c1b1a}.pk{background:var(--pk)}.yl{background:var(--yl)}.gr{background:var(--gr)}.bl{background:var(--bl)}
+.big{font-size:32px;font-weight:700;line-height:1.1}
+.mut{color:var(--mut);font-size:13px}.pc .mut{color:#3d3a36}
+.chip{display:inline-block;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:600}
+.ok{background:#d7efd9;color:#1f5a28}.warn{background:#fde3c4;color:#7a3a05}.bad{background:#f8cfd0;color:#7a1a1d}.info{background:var(--line);color:var(--ink)}
+button,select,input,textarea{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px;max-width:100%}
+button{cursor:pointer;background:var(--ink);color:var(--bg);border:0;font-weight:600}
+button.sec{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+button.sel{outline:2px solid var(--ink)}
+label{display:block;font-size:13px;color:var(--mut);margin:8px 0 2px}
+label.ck{display:flex;gap:8px;align-items:center;color:var(--ink);font-size:14px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.bar{height:10px;border-radius:9px;background:rgba(0,0,0,.15);overflow:hidden}.bar i{display:block;height:100%;background:#1c1b1a;width:0}
+.it{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:5px 0;font-size:14px}
+.it span{text-align:right}
+.wb{background:#fde3c4;color:#7a3a05;border-radius:14px;padding:12px 14px;margin:12px 0}
+.mono{font-variant-numeric:tabular-nums;font-size:38px;font-weight:700}
+.wk{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}.dd{width:42px;height:42px;border-radius:50%;padding:0;background:#fff;color:#1c1b1a;border:0;font-size:12px;font-weight:600}.dd.t{background:var(--ink);color:var(--bg)}.dd.s{background:var(--ac);color:#fff}.mb{display:flex;gap:8px;align-items:flex-end;margin:10px 0}.mb div{flex:1;border-radius:18px;padding:10px;color:#1c1b1a;font-size:13px;font-weight:600}.mb b{display:block;font-size:20px}.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;font-size:13px}.cal span{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.55);color:#1c1b1a}.lg{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;margin-top:8px}.lg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}.plus{display:none}.ringw{position:relative;display:grid;place-items:center}.ph{padding:6px 0;border-bottom:1px solid var(--line);font-size:14px;opacity:.55}.ph.on{opacity:1;font-weight:600}
+@media(max-width:760px){.app{display:block}nav{position:fixed;top:auto;bottom:calc(10px + env(safe-area-inset-bottom,0px));left:12px;right:12px;width:auto;height:auto;flex-direction:row;justify-content:space-around;align-items:center;border-radius:30px;padding:8px 6px;z-index:5}.plus{display:grid;place-items:center;width:50px;height:50px;border-radius:50%;background:var(--pk);color:#1c1b1a!important;font-size:28px;margin-top:-26px;padding:0!important}nav b{display:none}nav a{flex-direction:column;align-items:center;gap:0;font-size:10px;padding:6px 3px}main{padding:16px 14px 110px}}
+</style></head><body>
+<div class="app"><nav id="nav"></nav><main id="main"></main></div>
+<script>
+const $=s=>document.querySelector(s),fmt=n=>Math.round(n),norm=t=>String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const DIAS=[['seg','Seg'],['ter','Ter'],['qua','Qua'],['qui','Qui'],['sex','Sex'],['sab','Sáb'],['dom','Dom']];
+const FIELDS=[['ac','Acompanhamentos'],['pr','Prato principal'],['gu','Guarnição'],['sa','Salada'],['so','Sobremesa'],['re','Refresco']];
+const DK=()=>['dom','seg','ter','qua','qui','sex','sab'][new Date().getDay()];
+const ISO=()=>new Date().toLocaleDateString('sv');
+let S=null;try{S=JSON.parse(localStorage.getItem('nutriru2'))}catch(e){}
+S=S||{p:{sexo:'F',at:1.375},dieta:'perda',menu:{},fast:{h:16},ex:[]};
+S.meals=S.meals||[];S.goal=S.goal||{};
+if(!Object.keys(S.menu).length)S.menu['seg-al']={n:{ac:'Arroz e feijão',pr:'Cubos de frango com legumes (vagem, batata e cenoura)',gu:'Polenta cremosa',sa:'Alface',so:'Banana prata',re:'Manga'},v:{ac:'Arroz integral e feijão',pr:'Almôndega vegana ao sugo',gu:'Polenta cremosa',sa:'Alface',so:'Banana prata',re:'Manga'}};
+const save=()=>{try{localStorage.setItem('nutriru2',JSON.stringify(S))}catch(e){}};
+let dia=DK(),ref='al',edit=false;
+
+/* alimentos: [regex, kcal, carb, prot, gord] por porção típica de RU (estimativa) */
+const FOODS=[[/arroz integral/,150,31,3.5,1.2],[/arroz/,160,35,3,.5],[/feijao/,75,13.6,4.8,.5],
+[/almondega vegana|soja|grao.de.bico|lentilha/,200,20,12,7],[/frango/,190,2,28,8],
+[/carne|bife|almondega|hamburguer|linguica|porco|file|strogonoff/,230,4,24,13],[/peixe|tilapia|merluza/,180,0,26,8],[/ovo/,90,.5,7,6.5],
+[/macarrao|massa|espaguete|nhoque/,200,40,7,1],[/polenta|farofa|pure|mandioca|batata/,110,20,2,2],
+[/legume|vagem|cenoura|abobrinha|chuchu|brocolis|couve|beterraba|tomate|repolho|alface|salada|pepino|rucula|agriao|berinjela/,25,5,1.5,.2],
+[/banana|\bmaca\b|laranja|melancia|mamao|abacaxi|fruta|tangerina|pera/,70,17,1,.2],[/manga|suco|refresco|uva|limonada/,80,20,.3,0],
+[/doce|gelatina|pudim|bolo|goiabada|mousse/,150,28,2,4],[/pao/,135,26,4,1.5]];
+function est(o){let t=norm(Object.values(o||{}).join(' , ')).replace(/\([^)]*\)/g,' '),it=[];
+FOODS.forEach(([r,k,c,p,f])=>{const g=new RegExp(r.source,'g');let m;while((m=g.exec(t)))it.push({n:m[0],k,c,p,f});t=t.replace(g,' ')});
+const tot=it.reduce((a,i)=>({k:a.k+i.k,c:a.c+i.c,p:a.p+i.p,f:a.f+i.f}),{k:0,c:0,p:0,f:0});return{it,tot}}
+
+function meta(){const p=S.p,w=+p.peso,h=+p.altura,a=+p.idade;if(!(w>0&&h>0&&a>0))return null;
+const imc=w/((h/100)**2),tmb=10*w+6.25*h-5*a+(p.sexo=='M'?5:-161),get=tmb*(+p.at||1.2),bl=[];
+if(a<18)bl.push('menor de 18 anos');if(imc<18.5)bl.push('IMC abaixo de 18,5');if(p.g)bl.push('gestação ou lactação');if(p.d)bl.push('diabetes ou medicação contínua');if(p.t)bl.push('histórico de transtorno alimentar');
+const pct=imc<25?.1:imc<30?.15:.2;let kcal=bl.length?get:Math.min(get,Math.max(get*(1-pct),tmb,p.sexo=='M'?1500:1200));
+let pr=Math.min(1.6*w,kcal*.35/4),f,c;
+if(S.dieta=='keto'&&!bl.length){c=30;pr=Math.min(1.4*w,kcal*.3/4);f=(kcal-4*c-4*pr)/9}else{f=.27*kcal/9;c=(kcal-4*pr-9*f)/4}
+return{imc,tmb,get,kcal,c,p:pr,f,bl,pct}}
+const cat=i=>i<18.5?'Abaixo do peso':i<25?'Peso adequado':i<30?'Sobrepeso':i<35?'Obesidade grau I':i<40?'Obesidade grau II':'Obesidade grau III';
+
+function verdict(e){const m=meta();if(!m)return{c:'info',l:'Sem perfil',t:'Preencha o Perfil para avaliar a refeição.'};
+if(m.bl.length)return{c:'bad',l:'Restrição bloqueada',t:'Seu perfil pede acompanhamento de nutricionista antes de qualquer restrição.'};
+const heavy=e.it.filter(i=>i.c>=12&&i.p<10),acc=n=>n.replace('feijao','feijão').replace('almondega','almôndega').replace('macarrao','macarrão').replace('mamao','mamão');
+if(S.dieta=='keto'){if(!heavy.length)return{c:'ok',l:'Encaixa na cetogênica',t:'Poucos carboidratos nesta refeição.'};
+const keep=e.it.filter(i=>!heavy.includes(i)).reduce((a,i)=>({k:a.k+i.k,c:a.c+i.c}),{k:0,c:0});
+return{c:'warn',l:'Ajustar',t:`Retire: ${[...new Set(heavy.map(i=>acc(i.n)))].join(', ')}. Restam ≈ ${fmt(keep.k)} kcal e ${fmt(keep.c)} g de carboidrato.`}}
+const alvo=m.kcal*.35;if(e.tot.k<=alvo*1.1)return{c:'ok',l:'Encaixa na meta',t:`Dentro de ≈ 35% das calorias do dia (${fmt(alvo)} kcal).`};
+const k2=e.tot.k-heavy.reduce((a,i)=>a+i.k/2,0);
+return{c:'warn',l:'Reduzir porção',t:`Acima de ${fmt(alvo)} kcal. Com metade do arroz, feijão, polenta e fruta/refresco: ≈ ${fmt(k2)} kcal.`}}
+
+function mcard(o,title){if(!o||!Object.values(o).some(x=>x))return`<div class="c"><h2>${title}</h2><span class="mut">Sem cardápio cadastrado.</span></div>`;
+const e=est(o),v=verdict(e);return`<div class="c"><h2>${title}</h2>${FIELDS.map(([k,l])=>o[k]?`<div class="it"><b>${l}</b><span>${esc(o[k])}</span></div>`:'').join('')}
+<p class="mut">≈ ${fmt(e.tot.k)} kcal</p>${mb(e.tot)}<span class="chip ${v.c}">${v.l}</span><p class="mut">${v.t}</p></div>`}
+
+const EX=[['Caminhada leve',2.8],['Caminhada rápida',4.3],['Corrida 8 km/h',8.3],['Corrida 10 km/h',9.8],['Ciclismo moderado',8],['Natação moderada',5.8],['Musculação leve/moderada',3.5],['Musculação vigorosa',6],['HIIT / funcional',8],['Dança',5],['Futebol',7],['Yoga',2.5],['Subir escadas',4],['Limpeza doméstica',3.3]];
+const exHoje=()=>S.ex.filter(x=>x.d==ISO());
+const mb=t=>{const x=Math.max(t.c,t.p,t.f,1);return`<div class="mb">${[['Proteína',t.p,'var(--bl)'],['Carbo',t.c,'var(--pk)'],['Gordura',t.f,'var(--gr)']].map(([n,v,c])=>`<div style="background:${c};min-height:${50+v/x*70}px">${n}<b>${fmt(v)} g</b></div>`).join('')}</div>`};
+function actCal(){const n=new Date(),y=n.getFullYear(),mo=n.getMonth(),first=(new Date(y,mo,1).getDay()+6)%7,days=new Date(y,mo+1,0).getDate(),tot={};
+S.ex.forEach(x=>tot[x.d]=(tot[x.d]||0)+x.k);let c=['S','T','Q','Q','S','S','D'].map(x=>`<b>${x}</b>`).join('')+'<i></i>'.repeat(first);
+for(let d=1;d<=days;d++){const k=tot[`${y}-${String(mo+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`]||0;c+=`<span style="${k?`background:${k>=400?'var(--pk)':k>=250?'var(--gr)':k>=100?'var(--bl)':'var(--yl)'}`:''}">${d}</span>`}
+return`<div class="c"><h2>Atividade do mês</h2><div class="cal">${c}</div><div class="lg"><span><i style="background:var(--pk)"></i>Muito alta (400+ kcal)</span><span><i style="background:var(--gr)"></i>Alta (250+)</span><span><i style="background:var(--bl)"></i>Moderada (100+)</span><span><i style="background:var(--yl)"></i>Baixa</span></div></div>`}
+const PROTOS=[['12:12',12],['14:10',14],['16:8',16],['18:6',18],['20:4',20],['24 h',24]];
+const PH=[[0,'Fase alimentada (0 a 4 h)','Digestão e absorção; insulina alta, o corpo usa a glicose da refeição.'],[4,'Pós-absortiva (4 a 12 h)','O glicogênio do fígado sustenta a glicemia e a insulina cai.'],[12,'Transição (12 a 16 h)','O glicogênio diminui e a lipólise aumenta: a gordura passa a ser a principal fonte de energia.'],[16,'Cetose leve (16 a 24 h)','O fígado produz mais cetonas. O momento varia muito entre pessoas e com a última refeição.'],[24,'Acima de 24 h','Cetose mais marcada. Exige acompanhamento profissional.']];
+
+const PAGES={
+painel(){const m=meta(),d=DK(),mn=S.menu[d+'-al'],ex=exHoje().reduce((a,x)=>a+x.k,0),f=S.fast.start,hh=f?(Date.now()-f)/3600000:0;
+let ring='';if(m){const sp=[[m.c*4,'var(--pk)'],[m.p*4,'var(--bl)'],[m.f*9,'var(--yl)']],T=sp.reduce((a,x)=>a+x[0],0);let o=0;
+ring=`<svg viewBox="0 0 180 180" width="200">${sp.map(([k,c])=>{const fr=k/T,s=`<circle cx="90" cy="90" r="70" fill="none" stroke="${c}" stroke-width="24" stroke-linecap="round" stroke-dasharray="${Math.max(1,fr*440-16)} 440" stroke-dashoffset="${-o*440}" transform="rotate(-90 90 90)"/>`;o+=fr;return s}).join('')}<text x="90" y="94" text-anchor="middle" font-size="34" font-weight="700" fill="currentColor">${fmt(m.kcal)}</text><text x="90" y="114" text-anchor="middle" font-size="12" fill="currentColor">kcal por dia</text></svg>`}
+return`<h1>Seu dia<br><i>no RU e na dieta</i></h1>
+<div class="wk">${DIAS.map(([i,l])=>`<button class="dd ${i==d?'t':''}" onclick="dia='${i}';location.hash='cardapio'">${l}</button>`).join('')}</div>
+${m&&m.bl.length?`<div class="wb"><b>Restrição calórica, cetogênica e jejum bloqueados:</b> ${m.bl.join('; ')}. Procure um nutricionista ou médico.</div>`:''}
+<div class="g"><div class="c" style="text-align:center">${ring||'<span class="mut">Preencha o Perfil para ver sua meta.</span>'}${m?`<div class="lg" style="justify-content:center"><span><i style="background:var(--pk)"></i>Carboidrato ${fmt(m.c)} g</span><span><i style="background:var(--bl)"></i>Proteína ${fmt(m.p)} g</span><span><i style="background:var(--yl)"></i>Gordura ${fmt(m.f)} g</span></div>`:''}</div>
+<div style="display:grid;gap:14px"><div class="c pc yl"><h2>IMC</h2>${m?`<div class="big">${m.imc.toFixed(1)}</div>${cat(m.imc)}`:'<span class="mut">Preencha o Perfil.</span>'}</div>
+<div class="c pc gr"><h2>Jejum</h2><div class="big">${f?`${hh|0} h ${(hh*60)%60|0} min`:'Inativo'}</div></div>
+<div class="c pc bl"><h2>Exercícios hoje</h2><div class="big">${fmt(ex)} kcal</div></div></div></div>
+<h2>Almoço de hoje no RU</h2><div class="g">${mn?mcard(mn.n,'Tradicional')+mcard(mn.v,'Vegana / integral'):'<div class="c"><span class="mut">Sem cardápio para hoje. Cadastre em Cardápio.</span></div>'}</div>`},
+painelOld(){const m=meta(),mn=S.menu[DK()+'-al'],ex=exHoje().reduce((a,x)=>a+x.k,0),f=S.fast.start;
+const hh=f?((Date.now()-f)/3600000):0;
+return`<h1>Olá! Seu painel de hoje</h1><p class="mut">Cardápio do RU, meta diária, jejum e exercícios em um lugar.</p>
+${m&&m.bl.length?`<div class="wb"><b>Restrição calórica, cetogênica e jejum bloqueados:</b> ${m.bl.join('; ')}. Para sua segurança, procure um nutricionista ou médico.</div>`:''}
+<div class="g">
+<div class="c pc yl"><h2>IMC</h2>${m?`<div class="big">${m.imc.toFixed(1)}</div><div>${cat(m.imc)}</div>`:'<span class="mut">Preencha o Perfil.</span>'}</div>
+<div class="c pc pk"><h2>Meta diária</h2>${m?`<div class="big">${fmt(m.kcal)} kcal</div><div class="mut">C ${fmt(m.c)} g, P ${fmt(m.p)} g, G ${fmt(m.f)} g</div>`:'<span class="mut">Preencha o Perfil.</span>'}</div>
+<div class="c pc gr"><h2>Jejum</h2><div class="big">${f?`${hh|0} h ${(hh*60)%60|0} min`:'Inativo'}</div><div class="mut">${f?'Em andamento':'Nenhum jejum em andamento'}</div></div>
+<div class="c pc bl"><h2>Exercícios hoje</h2><div class="big">${fmt(ex)} kcal</div><div class="mut">${exHoje().length} atividade(s)</div></div></div>
+<h2>Almoço de hoje no RU</h2><div class="g">${mn?mcard(mn.n,'Tradicional')+mcard(mn.v,'Vegana / integral'):'<div class="c"><span class="mut">Sem cardápio para hoje. Cadastre em Cardápio.</span></div>'}</div>`},
+
+cardapio(){const k=dia+'-'+ref,M=S.menu[k]||{n:{},v:{}};
+let h=`<h1>Cardápio semanal do RU</h1><p class="mut">Os valores são estimativas por tipo de prato, não dados oficiais do RU.</p>
+<div class="row">${DIAS.map(([i,l])=>`<button class="dd ${i==dia?'s':i==DK()?'t':''}" onclick="dia='${i}';go()">${l}</button>`).join('')}</div>
+<div class="row" style="margin-top:8px"><button class="${ref=='al'?'':'sec'}" onclick="ref='al';go()">Almoço</button><button class="${ref=='ja'?'':'sec'}" onclick="ref='ja';go()">Jantar</button><button class="sec" onclick="edit=!edit;go()">${edit?'Concluir edição':'Editar cardápio'}</button></div>`;
+if(edit)h+=`<div class="g">${[['n','Tradicional'],['v','Vegana / integral']].map(([o,t])=>`<div class="c"><h2>${t}</h2>${FIELDS.map(([f,l])=>`<label>${l}</label><input style="width:100%" value="${esc((M[o]||{})[f])}" onchange="setM('${k}','${o}','${f}',this.value)">`).join('')}</div>`).join('')}</div>`;
+else h+=`<div class="g">${mcard(M.n,'Tradicional')+mcard(M.v,'Vegana / integral')}</div>`;
+return h},
+
+jejum(){const m=meta(),f=S.fast,h=f.h||16;
+const rec=!m?'':m.imc<25?'12:12 a 14:10':m.imc<30?'14:10 a 16:8':'16:8, evoluindo para 18:6 se tolerar bem',mx=!m?24:m.imc<25?14:m.imc<30?16:18;
+if(m&&m.bl.length)return`<h1>Jejum</h1><div class="wb"><b>Jejum bloqueado:</b> ${m.bl.join('; ')}. Procure um profissional de saúde.</div>`;
+return`<h1>Jejum intermitente</h1><p class="mut">${m?`Pelo seu IMC (${m.imc.toFixed(1)}), o ponto de partida é ${rec}.`:'Preencha o Perfil para ver a recomendação pelo seu IMC.'} Com almoço e jantar no RU, uma janela das 12h às 20h encaixa no 16:8.</p>
+<div class="row">${PROTOS.map(([n,x])=>`<button class="${x==h?'':'sec'}" onclick="setH(${x})">${n}</button>`).join('')}<input type="number" min="8" max="24" value="${h}" style="width:80px" onchange="setH(Math.min(24,Math.max(8,+this.value||16)))"> <span class="mut">horas (máx. 24)</span></div>
+${h>mx?`<div class="wb">${h} h está acima do recomendado para o seu IMC. Comece por um protocolo mais curto.</div>`:''}
+<div class="g"><div class="c pc gr"><div class="ringw"><svg viewBox="0 0 180 180" width="210"><circle cx="90" cy="90" r="70" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="22"/><circle id="bar" cx="90" cy="90" r="70" fill="none" stroke="#1c1b1a" stroke-width="22" stroke-linecap="round" stroke-dasharray="440" stroke-dashoffset="440" transform="rotate(-90 90 90)"/></svg><div class="mono" id="tm" style="position:absolute;font-size:30px">00:00:00</div></div>
+<div class="row"><button onclick="startF()">${f.start?'Reiniciar':'Iniciar jejum'}</button>${f.start?'<button class="sec" onclick="stopF()">Encerrar</button>':''}</div><p class="mut" id="fat"></p></div>
+<div class="c"><h2>Fase atual</h2><div id="ph">Sem jejum ativo</div></div></div>
+<div class="c"><h2>Linha do tempo (aproximada)</h2>${PH.map(p=>`<div class="ph" data-h="${p[0]}">${p[1]}<div class="mut">${p[2]}</div></div>`).join('')}</div>`},
+
+exercicios(){const m=meta(),l=exHoje();
+return`<h1>Exercícios</h1><p class="mut">Gasto = MET × peso (kg) × horas. Valores de MET de referência do Compêndio de Atividades Físicas.</p>
+<div class="c"><div class="row"><select id="exi">${EX.map((x,i)=>`<option value="${i}">${x[0]} (${x[1]} MET)</option>`).join('')}</select><input id="exm" type="number" min="1" placeholder="minutos" style="width:110px"><button onclick="addEx()">Adicionar</button></div><p class="mut" id="exmsg"></p></div>
+<div class="g"><div class="c pc bl"><h2>Total de hoje</h2><div class="big">${fmt(l.reduce((a,x)=>a+x.k,0))} kcal</div></div><div class="c pc yl"><h2>Últimos 7 dias</h2><div class="big">${fmt(S.ex.filter(x=>(Date.now()-new Date(x.d))/864e5<8).reduce((a,x)=>a+x.k,0))} kcal</div></div></div>
+${actCal()}<div class="c" style="margin-top:14px"><h2>Registro de hoje</h2>${l.length?l.map(x=>`<div class="it"><span style="text-align:left">${esc(EX[x.i][0])}, ${x.min} min</span><span>${fmt(x.k)} kcal <button class="sec" onclick="delEx(${S.ex.indexOf(x)})">Remover</button></span></div>`).join(''):'<span class="mut">Nenhuma atividade registrada hoje.</span>'}</div>`},
+
+perfil(){const p=S.p,m=meta(),ck=(k,t)=>`<label class="ck"><input type="checkbox" ${p[k]?'checked':''} onchange="setP('${k}',this.checked)">${t}</label>`;
+return`<h1>Perfil e dieta</h1><p class="mut">Seus dados ficam apenas neste aparelho.</p>
+<div class="g"><div class="c"><label>Peso (kg)</label><input type="number" inputmode="decimal" value="${p.peso??''}" onchange="setP('peso',this.value)">
+<label>Altura (cm)</label><input type="number" value="${p.altura??''}" onchange="setP('altura',this.value)">
+<label>Idade</label><input type="number" value="${p.idade??''}" onchange="setP('idade',this.value)">
+<label>Sexo</label><select onchange="setP('sexo',this.value)"><option value="F" ${p.sexo=='F'?'selected':''}>Feminino</option><option value="M" ${p.sexo=='M'?'selected':''}>Masculino</option></select>
+<label>Atividade física</label><select onchange="setP('at',this.value)">${[[1.2,'Sedentário'],[1.375,'Leve (1 a 3 dias/semana)'],[1.55,'Moderada (3 a 5 dias)'],[1.725,'Intensa (6 a 7 dias)']].map(([v,t])=>`<option value="${v}" ${+p.at==v?'selected':''}>${t}</option>`).join('')}</select>
+<label>Marque se for o seu caso</label>${ck('g','Gestante ou lactante')}${ck('d','Diabetes ou uso contínuo de medicação')}${ck('t','Histórico de transtorno alimentar')}</div>
+<div class="c"><h2>Escolha a dieta</h2>
+<button class="${S.dieta=='perda'?'sel':'sec'}" style="width:100%;text-align:left;margin-bottom:8px" onclick="setD('perda')">Perda de peso<div class="mut">Déficit moderado pelo IMC (10 a 20%), proteína alta, nunca abaixo do metabolismo basal.</div></button>
+<button class="${S.dieta=='keto'?'sel':'sec'}" style="width:100%;text-align:left" onclick="setD('keto')">Cetogênica<div class="mut">Cerca de 30 g de carboidrato por dia, proteína moderada, gordura como principal fonte. Só para adultos saudáveis.</div></button></div></div>
+${m?`<div class="g"><div class="c pc yl"><h2>IMC</h2><div class="big">${m.imc.toFixed(1)}</div>${cat(m.imc)}</div><div class="c pc pk"><h2>Metabolismo basal</h2><div class="big">${fmt(m.tmb)} kcal</div><span class="mut">Gasto total estimado: ${fmt(m.get)} kcal</span></div>
+<div class="c pc gr"><h2>Meta diária</h2><div class="big">${fmt(m.kcal)} kcal</div><span class="mut">C ${fmt(m.c)} g, P ${fmt(m.p)} g, G ${fmt(m.f)} g</span></div></div>
+${m.bl.length?`<div class="wb"><b>Bloqueado:</b> ${m.bl.join('; ')}. A meta acima é de manutenção. Procure um nutricionista ou médico.</div>`:''}`:''}`}};
+
+const monISO=()=>{const d=new Date();d.setDate(d.getDate()-((d.getDay()+6)%7));return d.toLocaleDateString('sv')};
+const banner=()=>S.menuWeek==monISO()?'':`<div class='wb' style='margin:0 0 14px'><b>${new Date().getDay()==1?'Segunda-feira: cadastre o cardápio do RU desta semana.':'O cardápio desta semana ainda não foi cadastrado.'}</b> <a href='#cardapio' style='color:inherit'>Abrir cardápio</a></div>`;
+const ctx=()=>{const m=meta(),p=S.p;return m?`${p.sexo=='M'?'homem':'mulher'}, ${p.idade} anos, ${p.peso} kg, ${p.altura} cm, IMC ${m.imc.toFixed(1)}; dieta ${S.dieta=='keto'?'cetogênica':'de perda de peso'}; meta diária ${fmt(m.kcal)} kcal, carboidrato ${fmt(m.c)} g, proteína ${fmt(m.p)} g, gordura ${fmt(m.f)} g`:''};
+let _s;async function AI(q,tier){try{_s=_s||await claude.use('sample')}catch(e){}if(!_s)throw {message:'A IA não está disponível neste aparelho. Abra o link pelo claude.ai ou pelo app Claude.'};return _s.json(q,{modelTier:tier||'quick'})}
+function fit(t){const m=meta();if(!m||m.bl.length)return{c:'info',l:'Sem meta'};if(S.dieta=='keto'){return t.c<=m.c/3?{c:'ok',l:'De acordo com a cetogênica'}:{c:'warn',l:'Muito carboidrato ('+fmt(t.c)+' g)'}}return t.k<=m.kcal*.4?{c:'ok',l:'De acordo com a meta'}:{c:'warn',l:'Acima da meta da refeição'}}
+async function addMeal(){const d=$('#mdesc').value.trim(),msg=$('#mmsg');if(!d){msg.textContent='Descreva a refeição.';return}$('#mbtn').disabled=true;msg.textContent='Calculando...';try{const r=await AI(`Você é um nutricionista assistente. Estime calorias e macronutrientes (em gramas) da refeição: ${d}. Se faltarem quantidades, assuma porções médias brasileiras. Contexto do usuário: ${ctx()||'não informado'}. Responda somente com um objeto JSON com as chaves nome (título curto), kcal, c (carboidrato), p (proteína), f (gordura) como números, e nota (1 a 2 frases em português dizendo se a refeição combina com a dieta e como ajustar).`);S.meals.push({d:ISO(),n:r.nome||d.slice(0,40),k:+r.kcal||0,c:+r.c||0,p:+r.p||0,f:+r.f||0,note:r.nota||''});save();go()}catch(e){msg.textContent=(e&&e.message)||'Não consegui calcular agora. Tente de novo.';$('#mbtn').disabled=false}}
+const delMeal=i=>{S.meals.splice(i,1);save();go()};
+PAGES.refeicoes=()=>{const m=meta(),l=S.meals.filter(x=>x.d==ISO()),T=l.reduce((a,x)=>({k:a.k+x.k,c:a.c+x.c,p:a.p+x.p,f:a.f+x.f}),{k:0,c:0,p:0,f:0});return`<h1>Adicionar refeição</h1><p class='mut'>Descreva o que você comeu, por exemplo: 2 ovos mexidos, 1 pão francês e café com leite. A IA estima calorias e macros e diz se combina com a sua dieta.</p><div class='c'><textarea id='mdesc' rows='3' style='width:100%' placeholder='O que você comeu?'></textarea><div class='row' style='margin-top:8px'><button id='mbtn' onclick='addMeal()'>Calcular com IA</button><span class='mut' id='mmsg'></span></div></div><div class='g'><div class='c pc pk'><h2>Total de hoje</h2><div class='big'>${fmt(T.k)} kcal</div><div class='mut'>${m?'de '+fmt(m.kcal)+' kcal. ':''}C ${fmt(T.c)} g, P ${fmt(T.p)} g, G ${fmt(T.f)} g</div>${m?`<div class='bar' style='margin-top:8px'><i style='width:${Math.min(100,T.k/m.kcal*100)}%'></i></div>`:''}</div></div>${l.map(x=>{const v=fit(x);return`<div class='c' style='margin-bottom:12px'><h2>${esc(x.n)}</h2>${mb(x)}<span class='chip ${v.c}'>${v.l}</span> <span class='mut'>${fmt(x.k)} kcal</span><p class='mut'>${esc(x.note)}</p><button class='sec' onclick='delMeal(${S.meals.indexOf(x)})'>Remover</button></div>`}).join('')||`<div class='c'><span class='mut'>Nenhuma refeição avulsa hoje.</span></div>`}`};
+const setG=(k,v)=>{S.goal[k]=v;save();go()};
+const planHtml=P=>{if(!P)return'';const cs=['pk','yl','bl','gr'],D=P.dieta||{};return`<h2 style='margin-top:18px'>Seu plano</h2><div class='c pc pk'><p style='margin:0'>${esc(P.resumo)}</p></div><h2 style='margin-top:14px'>Dieta</h2><div class='c'><ul>${(D.principios||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${(D.refeicoes||[]).map(r=>`<div class='it'><b>${esc(r.refeicao)}</b><span>${esc(r.sugestao)}</span></div>`).join('')}${D.ru?`<p class='mut'>${esc(D.ru)}</p>`:''}</div><h2 style='margin-top:14px'>Treino da semana</h2><div class='g'>${(P.treino||[]).map((t,i)=>`<div class='c pc ${cs[i%4]}'><h2>${esc(t.dia)}: ${esc(t.foco)}</h2><div class='mut'>${esc(t.duracao_min||'')} min</div><ul style='padding-left:18px;margin:6px 0 0'>${(t.exercicios||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}</div>${P.progressao?`<p class='mut'><b>Progressão:</b> ${esc(P.progressao)}</p>`:''}${(P.avisos||[]).map(a=>`<div class='wb'>${esc(a)}</div>`).join('')}`};
+async function genPlan(){const g=S.goal,msg=$('#pmsg');$('#pbtn').disabled=true;msg.textContent='Montando o plano... pode levar até 1 minuto.';try{const r=await AI(`Você é um nutricionista e educador físico assistente. Monte um plano para esta pessoa: ${ctx()}. Gordura corporal atual ${g.gca||'não informada'}%, meta de ${g.gcm||'não informada'}% de gordura e ${g.pm||'não informado'} kg${g.sem?', prazo de '+g.sem+' semanas':''}. Treina ${g.dias||3} dias por semana, nível ${g.nivel||'Iniciante'}, local: ${g.local||'Academia'}. Faz almoço e jantar no restaurante universitário (RU), com opção tradicional ou vegana. Regras: respeite a meta de calorias e macros informada, não sugira suplementos nem medicamentos, treino com progressão gradual e só nos dias informados, no máximo 4 princípios de dieta, 4 refeições de exemplo e 6 exercícios por treino (com séries e repetições). Responda somente com um objeto JSON com as chaves: resumo (até 40 palavras), dieta (objeto com principios: lista de textos, refeicoes: lista de objetos com refeicao e sugestao, ru: texto curto sobre como escolher no RU), treino (lista de objetos com dia, foco, exercicios: lista de textos, duracao_min), progressao (texto), avisos (lista com pelo menos um aviso para procurar nutricionista ou médico).`,'default');S.plan=r;save();go()}catch(e){msg.textContent=(e&&e.message)||'Não consegui montar agora. Tente de novo.';$('#pbtn').disabled=false}}
+PAGES.plano=()=>{const m=meta(),g=S.goal,w=+S.p.peso,h=+S.p.altura,bad=[],L=[];const gi=(k,t)=>`<label>${t}</label><input type='number' inputmode='decimal' value='${esc(g[k])}' data-k='${k}' onchange='setG(this.dataset.k,this.value)'>`,sel=(k,o,d)=>`<select data-k='${k}' onchange='setG(this.dataset.k,this.value)'>${o.map(x=>`<option ${(g[k]||d)==x?'selected':''}>${x}</option>`).join('')}</select>`;
+if(g.gca&&g.gcm&&w){const ml=w*(1-g.gca/100);L.push(`Massa magra estimada: ${ml.toFixed(1)} kg. Para ${g.gcm}% de gordura mantendo a massa magra, o peso seria ≈ ${(ml/(1-g.gcm/100)).toFixed(1)} kg.`)}
+if(+g.pm>0&&w){const d=w-g.pm;if(d>0){L.push(`Faltam ${d.toFixed(1)} kg. Em ritmo seguro (0,5 a 1% do peso por semana): ${Math.ceil(d/(.01*w))} a ${Math.ceil(d/(.005*w))} semanas.`);if(+g.sem>0){const r=d/g.sem/w*100;L.push(`Com prazo de ${g.sem} semanas: ${r.toFixed(2).replace('.',',')}% do peso por semana.`);if(r>1)bad.push('O ritmo passa de 1% do peso por semana. Aumente o prazo.')}}if(h&&g.pm<18.5*(h/100)**2)bad.push('A meta de peso deixa o IMC abaixo de 18,5.')}
+if(+g.gcm>0&&g.gcm<(S.p.sexo=='M'?8:16))bad.push('A meta de gordura corporal está abaixo do mínimo seguro para o seu sexo ('+(S.p.sexo=='M'?8:16)+'%).');if(m&&m.bl.length)bad.push('Seu perfil bloqueia planos de restrição: '+m.bl.join('; ')+'.');const can=m&&!bad.length;
+return`<h1>Meta e plano</h1><p class='mut'>Defina onde quer chegar e a IA monta dieta e treino dentro da sua meta de calorias.</p><div class='g'><div class='c'><h2>Sua meta</h2>${gi('gca','Gordura corporal atual (%)')}${gi('pm','Peso meta (kg)')}${gi('gcm','Gordura corporal meta (%)')}${gi('sem','Prazo desejado em semanas (opcional)')}<label>Dias de treino por semana</label>${sel('dias',['2','3','4','5','6'],'3')}<label>Nível</label>${sel('nivel',['Iniciante','Intermediário','Avançado'],'Iniciante')}<label>Onde treina</label>${sel('local',['Academia','Em casa','Ao ar livre'],'Academia')}</div><div class='c pc yl'><h2>Contas da sua meta</h2>${m?'':`<p class='mut'>Preencha o Perfil primeiro.</p>`}${L.map(x=>`<p>${x}</p>`).join('')||`<p class='mut'>Preencha peso e gordura meta para ver as contas.</p>`}</div></div>${bad.map(x=>`<div class='wb'>${x}</div>`).join('')}<div class='row'><button id='pbtn' ${can?'':'disabled'} onclick='genPlan()'>${S.plan?'Refazer plano':'Montar plano de treino e dieta'}</button><span class='mut' id='pmsg'></span></div>${planHtml(S.plan)}`};
+function nav(r){$('#nav').innerHTML='<b>🥗 NutriRU</b>'+[['painel','🏠','Painel'],['cardapio','🍽️','Cardápio'],['jejum','⏱️','Jejum'],['exercicios','🏃','Treino'],['plano','🎯','Plano'],['perfil','👤','Perfil']].map(([i,e,t])=>`<a href="#${i}" class="${i==r?'on':''}"><span>${e}</span>${t}</a>`).join('').replace(/(<a [^>]*>[^]*?<\/a>){3}/,x=>x+'<a class="plus" href="#refeicoes">+</a>')}
+function go(){let r=(location.hash||'#painel').slice(1);if(!PAGES[r])r='painel';nav(r);$('#main').innerHTML=banner()+PAGES[r]()+'<p class="mut" style="margin-top:26px">Ferramenta educativa: não substitui nutricionista ou médico. Os valores nutricionais do RU são estimativas.</p>';tick()}
+addEventListener('hashchange',go);
+const setP=(k,v)=>{S.p[k]=v;save();go()},setD=d=>{S.dieta=d;save();go()},setH=h=>{S.fast.h=h;save();go()};
+const setM=(k,o,f,v)=>{S.menuWeek=monISO();const M=S.menu[k]=S.menu[k]||{n:{},v:{}};(M[o]=M[o]||{})[f]=v;save()};
+const startF=()=>{S.fast.start=Date.now();save();go()},stopF=()=>{delete S.fast.start;save();go()};
+function addEx(){const m=meta(),i=+$('#exi').value,min=+$('#exm').value;if(!m||!(+S.p.peso>0)){$('#exmsg').textContent='Informe seu peso no Perfil para calcular as calorias.';return}
+if(!(min>0)){$('#exmsg').textContent='Informe a duração em minutos.';return}
+S.ex.push({d:ISO(),i,min,k:EX[i][1]*(+S.p.peso)*min/60});save();go()}
+const delEx=i=>{S.ex.splice(i,1);save();go()};
+function tick(){const el=$('#tm');if(!el)return;const s=S.fast.start,h=S.fast.h||16;
+if(!s){el.textContent='00:00:00';ring(0);$('#ph').textContent='Sem jejum ativo';$('#fat').textContent='';return}
+const sec=(Date.now()-s)/1000,H=sec/3600;el.textContent=[H|0,(sec/60)%60|0,sec%60|0].map(x=>String(x).padStart(2,'0')).join(':');
+ring(H/h);const P=PH.filter(x=>H>=x[0]).pop();$('#ph').innerHTML=`<b>${P[1]}</b><div class="mut">${P[2]}</div>`;
+document.querySelectorAll('.ph').forEach(e=>e.classList.toggle('on',+e.dataset.h==P[0]));
+const m=meta();$('#fat').textContent=m&&H>12?`Estimativa grosseira após 12 h: gasto basal ≈ ${fmt(m.tmb/24*(H-12))} kcal; se cerca de 60% vier de gordura, ≈ ${fmt(m.tmb/24*(H-12)*.6/9)} g.`:(S.fast.start&&H>=h?'Meta de jejum concluída.':'')}
+const ring=f=>{const b=$('#bar');if(b)b.style.strokeDashoffset=440*(1-Math.min(1,f))};setInterval(tick,1000);go();
+</script></body></html>
